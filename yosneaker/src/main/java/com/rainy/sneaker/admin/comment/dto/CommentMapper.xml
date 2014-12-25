@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainy.sneaker.admin.comment.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.rainy.sneaker.admin.comment.dto.Comment" >
+    <id column="article_comment_id" property="articleCommentId" jdbcType="INTEGER" />
+    <result column="article_comment_article_id" property="articleCommentArticleId" jdbcType="INTEGER" />
+    <result column="article_comment_content" property="articleCommentContent" jdbcType="VARCHAR" />
+    <result column="article_comment_account_id" property="articleCommentAccountId" jdbcType="INTEGER" />
+    <result column="article_comment_publish_time" property="articleCommentPublishTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    article_comment_id, article_comment_article_id, article_comment_content, article_comment_account_id, 
+    article_comment_publish_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rainy.sneaker.admin.comment.dto.CommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sneaker_article_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MysqlSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sneaker_article_comment
+    where article_comment_id = #{articleCommentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sneaker_article_comment
+    where article_comment_id = #{articleCommentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rainy.sneaker.admin.comment.dto.CommentExample" >
+    delete from sneaker_article_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rainy.sneaker.admin.comment.dto.Comment" >
+    insert into sneaker_article_comment (article_comment_id, article_comment_article_id, 
+      article_comment_content, article_comment_account_id, 
+      article_comment_publish_time)
+    values (#{articleCommentId,jdbcType=INTEGER}, #{articleCommentArticleId,jdbcType=INTEGER}, 
+      #{articleCommentContent,jdbcType=VARCHAR}, #{articleCommentAccountId,jdbcType=INTEGER}, 
+      #{articleCommentPublishTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainy.sneaker.admin.comment.dto.Comment" >
+    insert into sneaker_article_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleCommentId != null" >
+        article_comment_id,
+      </if>
+      <if test="articleCommentArticleId != null" >
+        article_comment_article_id,
+      </if>
+      <if test="articleCommentContent != null" >
+        article_comment_content,
+      </if>
+      <if test="articleCommentAccountId != null" >
+        article_comment_account_id,
+      </if>
+      <if test="articleCommentPublishTime != null" >
+        article_comment_publish_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleCommentId != null" >
+        #{articleCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentArticleId != null" >
+        #{articleCommentArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentContent != null" >
+        #{articleCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCommentAccountId != null" >
+        #{articleCommentAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentPublishTime != null" >
+        #{articleCommentPublishTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rainy.sneaker.admin.comment.dto.CommentExample" resultType="java.lang.Integer" >
+    select count(*) from sneaker_article_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sneaker_article_comment
+    <set >
+      <if test="record.articleCommentId != null" >
+        article_comment_id = #{record.articleCommentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleCommentArticleId != null" >
+        article_comment_article_id = #{record.articleCommentArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleCommentContent != null" >
+        article_comment_content = #{record.articleCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleCommentAccountId != null" >
+        article_comment_account_id = #{record.articleCommentAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.articleCommentPublishTime != null" >
+        article_comment_publish_time = #{record.articleCommentPublishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sneaker_article_comment
+    set article_comment_id = #{record.articleCommentId,jdbcType=INTEGER},
+      article_comment_article_id = #{record.articleCommentArticleId,jdbcType=INTEGER},
+      article_comment_content = #{record.articleCommentContent,jdbcType=VARCHAR},
+      article_comment_account_id = #{record.articleCommentAccountId,jdbcType=INTEGER},
+      article_comment_publish_time = #{record.articleCommentPublishTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rainy.sneaker.admin.comment.dto.Comment" >
+    update sneaker_article_comment
+    <set >
+      <if test="articleCommentArticleId != null" >
+        article_comment_article_id = #{articleCommentArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentContent != null" >
+        article_comment_content = #{articleCommentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="articleCommentAccountId != null" >
+        article_comment_account_id = #{articleCommentAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="articleCommentPublishTime != null" >
+        article_comment_publish_time = #{articleCommentPublishTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where article_comment_id = #{articleCommentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rainy.sneaker.admin.comment.dto.Comment" >
+    update sneaker_article_comment
+    set article_comment_article_id = #{articleCommentArticleId,jdbcType=INTEGER},
+      article_comment_content = #{articleCommentContent,jdbcType=VARCHAR},
+      article_comment_account_id = #{articleCommentAccountId,jdbcType=INTEGER},
+      article_comment_publish_time = #{articleCommentPublishTime,jdbcType=TIMESTAMP}
+    where article_comment_id = #{articleCommentId,jdbcType=INTEGER}
+  </update>
+  <sql id="MysqlSuffix" >
+    <if test="page != null" >
+      limit #{page.start} , #{page.rows}
+    </if>
+  </sql>
+</mapper>
