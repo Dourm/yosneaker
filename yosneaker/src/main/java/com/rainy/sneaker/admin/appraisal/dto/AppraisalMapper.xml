@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rainy.sneaker.admin.appraisal.dao.AppraisalMapper" >
+  <resultMap id="BaseResultMap" type="com.rainy.sneaker.admin.appraisal.dto.Appraisal" >
+    <id column="appraisal_id" property="appraisalId" jdbcType="INTEGER" />
+    <result column="appraisal_title" property="appraisalTitle" jdbcType="VARCHAR" />
+    <result column="appraisal_description" property="appraisalDescription" jdbcType="VARCHAR" />
+    <result column="appraisal_images" property="appraisalImages" jdbcType="VARCHAR" />
+    <result column="appraisal_author_id" property="appraisalAuthorId" jdbcType="INTEGER" />
+    <result column="appraisal_follower_ids" property="appraisalFollowerIds" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    appraisal_id, appraisal_title, appraisal_description, appraisal_images, appraisal_author_id, 
+    appraisal_follower_ids
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.rainy.sneaker.admin.appraisal.dto.AppraisalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sneaker_appraisal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <include refid="MysqlSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sneaker_appraisal
+    where appraisal_id = #{appraisalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sneaker_appraisal
+    where appraisal_id = #{appraisalId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rainy.sneaker.admin.appraisal.dto.AppraisalExample" >
+    delete from sneaker_appraisal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rainy.sneaker.admin.appraisal.dto.Appraisal" >
+    insert into sneaker_appraisal (appraisal_id, appraisal_title, appraisal_description, 
+      appraisal_images, appraisal_author_id, appraisal_follower_ids
+      )
+    values (#{appraisalId,jdbcType=INTEGER}, #{appraisalTitle,jdbcType=VARCHAR}, #{appraisalDescription,jdbcType=VARCHAR}, 
+      #{appraisalImages,jdbcType=VARCHAR}, #{appraisalAuthorId,jdbcType=INTEGER}, #{appraisalFollowerIds,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rainy.sneaker.admin.appraisal.dto.Appraisal" >
+    insert into sneaker_appraisal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="appraisalId != null" >
+        appraisal_id,
+      </if>
+      <if test="appraisalTitle != null" >
+        appraisal_title,
+      </if>
+      <if test="appraisalDescription != null" >
+        appraisal_description,
+      </if>
+      <if test="appraisalImages != null" >
+        appraisal_images,
+      </if>
+      <if test="appraisalAuthorId != null" >
+        appraisal_author_id,
+      </if>
+      <if test="appraisalFollowerIds != null" >
+        appraisal_follower_ids,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="appraisalId != null" >
+        #{appraisalId,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalTitle != null" >
+        #{appraisalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalDescription != null" >
+        #{appraisalDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalImages != null" >
+        #{appraisalImages,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalAuthorId != null" >
+        #{appraisalAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalFollowerIds != null" >
+        #{appraisalFollowerIds,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rainy.sneaker.admin.appraisal.dto.AppraisalExample" resultType="java.lang.Integer" >
+    select count(*) from sneaker_appraisal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sneaker_appraisal
+    <set >
+      <if test="record.appraisalId != null" >
+        appraisal_id = #{record.appraisalId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appraisalTitle != null" >
+        appraisal_title = #{record.appraisalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appraisalDescription != null" >
+        appraisal_description = #{record.appraisalDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appraisalImages != null" >
+        appraisal_images = #{record.appraisalImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appraisalAuthorId != null" >
+        appraisal_author_id = #{record.appraisalAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.appraisalFollowerIds != null" >
+        appraisal_follower_ids = #{record.appraisalFollowerIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sneaker_appraisal
+    set appraisal_id = #{record.appraisalId,jdbcType=INTEGER},
+      appraisal_title = #{record.appraisalTitle,jdbcType=VARCHAR},
+      appraisal_description = #{record.appraisalDescription,jdbcType=VARCHAR},
+      appraisal_images = #{record.appraisalImages,jdbcType=VARCHAR},
+      appraisal_author_id = #{record.appraisalAuthorId,jdbcType=INTEGER},
+      appraisal_follower_ids = #{record.appraisalFollowerIds,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rainy.sneaker.admin.appraisal.dto.Appraisal" >
+    update sneaker_appraisal
+    <set >
+      <if test="appraisalTitle != null" >
+        appraisal_title = #{appraisalTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalDescription != null" >
+        appraisal_description = #{appraisalDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalImages != null" >
+        appraisal_images = #{appraisalImages,jdbcType=VARCHAR},
+      </if>
+      <if test="appraisalAuthorId != null" >
+        appraisal_author_id = #{appraisalAuthorId,jdbcType=INTEGER},
+      </if>
+      <if test="appraisalFollowerIds != null" >
+        appraisal_follower_ids = #{appraisalFollowerIds,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where appraisal_id = #{appraisalId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rainy.sneaker.admin.appraisal.dto.Appraisal" >
+    update sneaker_appraisal
+    set appraisal_title = #{appraisalTitle,jdbcType=VARCHAR},
+      appraisal_description = #{appraisalDescription,jdbcType=VARCHAR},
+      appraisal_images = #{appraisalImages,jdbcType=VARCHAR},
+      appraisal_author_id = #{appraisalAuthorId,jdbcType=INTEGER},
+      appraisal_follower_ids = #{appraisalFollowerIds,jdbcType=VARCHAR}
+    where appraisal_id = #{appraisalId,jdbcType=INTEGER}
+  </update>
+  <sql id="MysqlSuffix" >
+    <if test="page != null" >
+      limit #{page.start} , #{page.rows}
+    </if>
+  </sql>
+</mapper>
