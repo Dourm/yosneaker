@@ -18,7 +18,11 @@
 <table id="site-datagrid" class="easyui-datagrid" title="" 
             data-options="rownumbers:true,singleSelect:true,fitColumns:true,url:'/admin/article',pagination:true,toolbar:'#siteTb'">
      <thead>
-         <tr>       	          	         
+         <tr>
+         	 <th data-options="field:'articleId'">id</th>
+         	 <th data-options="field:'articleComment'">articleComment</th>
+         	 <th data-options="field:'articleTitle'">articleTitle</th>
+         	 <th data-options="field:'articleLevel'">articleLevel</th>
              <th data-options="field:'id',width:50,align:'center',formatter:article.fmtOperate">操作</th>
          </tr>
      </thead>

@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.nd.common.util.ObjectUtils;
+import com.rainy.common.tools.ObjectUtils;
 import com.rainy.sneaker.admin.comment.dao.CommentDao;
 import com.rainy.sneaker.admin.comment.dto.Comment;
 import com.rainy.sneaker.admin.comment.dto.CommentExample;

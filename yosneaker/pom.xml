@@ -8,34 +8,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-	<repositories>
-		<repository>
-			<id>tming.internal</id>
-			<url>http://192.168.9.153:8000/repository/internal/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>tming.snapshots</id>
-			<url>http://192.168.9.153:8000/repository/snapshots/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<reporting>
-		<plugins>
-
-		</plugins>
-	</reporting>
-	
 	<build>
 		<resources>
 			<resource>
@@ -77,12 +49,6 @@
 	</build>
 
 	<dependencies>
-
-		<dependency>
-  			<groupId>com.nd</groupId>
-  			<artifactId>common</artifactId>
-  			<version>1.0-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -282,7 +248,12 @@
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-		 
+
+		<dependency>
+			<groupId>com.rainy.common</groupId>
+			<artifactId>tools</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<packaging>war</packaging>
 </project>

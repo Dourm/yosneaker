@@ -1,9 +1,10 @@
 package com.rainy.sneaker.admin.article.dto;
 
-import com.nd.common.util.Page;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import com.rainy.common.tools.db.Page;
 
 public class ArticleExample {
     protected String orderByClause;

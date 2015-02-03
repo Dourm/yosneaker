@@ -1,4 +1,4 @@
-package com.nd.common.base;
+package com.rainy.sneaker;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
