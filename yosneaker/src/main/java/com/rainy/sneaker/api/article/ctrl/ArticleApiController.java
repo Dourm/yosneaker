@@ -1,4 +1,4 @@
-package com.rainy.sneaker.admin.article.ctrl;
+package com.rainy.sneaker.api.article.ctrl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +29,9 @@ import com.rainy.sneaker.admin.article.service.IArticleService;
  * @version
  */
 @Controller
-@RequestMapping("/admin/article")
-public class ArticleController extends BaseController{
-	private final static Logger logger = Logger.getLogger(ArticleController.class);
+@RequestMapping("/v0.1/articles")
+public class ArticleApiController extends BaseController{
+	private final static Logger logger = Logger.getLogger(ArticleApiController.class);
 	
 	@Resource
     IArticleService articleService;//测评管理
@@ -79,6 +79,7 @@ public class ArticleController extends BaseController{
 			if(isSuccess){//成功
 				state.setSuccess(true);
 				state.setMsg("");
+				state.setObj(record);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

@@ -3,7 +3,8 @@ package com.rainy.sneaker.admin.article.dto;
 import java.util.Date;
 
 public class Article {
-    private Integer articleId;
+
+	private Integer articleId;
 
     private String articleTitle;
 
