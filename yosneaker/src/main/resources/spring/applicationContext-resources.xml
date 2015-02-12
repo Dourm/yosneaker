@@ -18,7 +18,7 @@
 				<value>classpath:dbconfig/c3p0-config.properties</value>
 				<value>classpath:spring/memcached.properties</value>
 				<value>classpath:dbconfig/redis.properties</value>
-				
+				<value>classpath:resource.properties</value>
 			</list>
 		</property>
 	</bean>
